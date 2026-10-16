@@ -5,15 +5,16 @@ import (
 	"cuhk-vpn-go/internal/broker"
 	"cuhk-vpn-go/internal/core"
 	"cuhk-vpn-go/internal/platform"
+	"cuhk-vpn-go/internal/tray"
 	"embed"
 	"encoding/json"
 	"fmt"
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/menu"
+	"github.com/wailsapp/wails/v2/pkg/menu/keys"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
 	"github.com/wailsapp/wails/v2/pkg/options/windows"
-	wruntime "github.com/wailsapp/wails/v2/pkg/runtime"
 	"io/fs"
 	"os"
 	"runtime"
@@ -21,6 +22,15 @@ import (
 
 //go:embed all:frontend
 var frontend embed.FS
+
+//go:embed build/windows/icon.ico
+var trayWindowsIcon []byte
+
+//go:embed build/appicon.png
+var trayPNGIcon []byte
+
+// Overridden only for an isolated UI test build; helpers never create a tray.
+var desktopInstanceID = "cuhk-vpn-go-desktop-v1"
 
 func main() {
 	args := os.Args[1:]
@@ -53,11 +63,26 @@ func main() {
 		return
 	}
 	app := NewApp()
+	icon := trayPNGIcon
+	if runtime.GOOS == "windows" {
+		icon = trayWindowsIcon
+	}
+	template, _ := frontend.ReadFile("frontend/icons/network.png")
+	trayController := tray.New(icon, template, tray.Actions{Show: app.ShowWindow, Toggle: app.toggleFromTray, Quit: app.Quit, Ready: app.emit})
+	app.tray = trayController
+	if e := trayController.Start(); e != nil {
+		app.log("托盘不可用：" + e.Error())
+	}
+	defer trayController.Stop()
 	assets, _ := fs.Sub(frontend, "frontend")
 	var m *menu.Menu
 	if runtime.GOOS == "darwin" {
 		m = menu.NewMenu()
-		m.Append(menu.AppMenu())
+		applicationMenu := m.AddSubmenu("CUHK VPN")
+		applicationMenu.AddText("显示主界面", nil, func(_ *menu.CallbackData) { app.ShowWindow() })
+		applicationMenu.AddSeparator()
+		applicationMenu.AddText("退出 CUHK VPN", keys.CmdOrCtrl("q"), func(_ *menu.CallbackData) { app.Quit() })
+		m.Append(menu.EditMenu())
 	}
 	err := wails.Run(&options.App{Title: "CUHK VPN · CRT", Width: 520, Height: 820, MinWidth: 400, MinHeight: 620,
 		BackgroundColour: options.NewRGB(9, 19, 13), AssetServer: &assetserver.Options{Assets: assets}, Menu: m,
@@ -67,11 +92,8 @@ func main() {
 			DarkModeBorder: windows.RGB(43, 70, 49), DarkModeBorderInactive: windows.RGB(27, 38, 28),
 		}},
 		OnStartup: app.startup, OnBeforeClose: app.beforeClose, OnShutdown: app.shutdown, Bind: []interface{}{app},
-		SingleInstanceLock: &options.SingleInstanceLock{UniqueId: "cuhk-vpn-go-desktop-v1", OnSecondInstanceLaunch: func(_ options.SecondInstanceData) {
-			if app.ctx != nil {
-				wruntime.WindowShow(app.ctx)
-				wruntime.WindowUnminimise(app.ctx)
-			}
+		SingleInstanceLock: &options.SingleInstanceLock{UniqueId: desktopInstanceID, OnSecondInstanceLaunch: func(_ options.SecondInstanceData) {
+			app.ShowWindow()
 		}},
 	})
 	if err != nil {

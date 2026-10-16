@@ -64,7 +64,9 @@ function render(v) {
   }
   const c=v.core||{}, state=v.state||'disconnected', phase=v.phase||'', running=state!=='disconnected';
   $('app').dataset.state=state;$('app').dataset.coreReady=String(!!c.ready);
-  $('status').textContent=states[state]||state;
+  $('status').textContent=v.exiting?'正在退出…':states[state]||state;
+  $('tray-hint').hidden=!v.tray;
+  $('quit').disabled=!api||v.exiting;
   const detail=state==='connected'?(v.ip?'VPN '+v.ip+(v.interface?' · '+v.interface:''):'校园连接已建立'):
     state==='preparing'?'正在校验、下载并准备便携核心…':state==='disconnecting'?'正在清理隧道与分流路由…':
     state==='connecting'?(phase==='authorize'?'请完成系统管理员授权…':phase==='core'?'正在检查便携核心…':'正在认证并建立校园隧道…'):'校园网段通过 VPN，其余流量直连';
@@ -77,9 +79,9 @@ function render(v) {
   setStage('stage-connect',state==='connected',state==='connecting'&&phase==='connect'||state==='disconnecting');
   label('connect',state==='preparing'?'正在准备核心…':state==='connecting'?'取消连接':state==='disconnecting'?'重试断开':state==='connected'?'断开连接':'连接 VPN');
   $('connect').setAttribute('aria-busy',String(state==='preparing'||state==='connecting'||state==='disconnecting'));
-  $('connect').disabled=!api||state==='preparing'||pending.has('connect')||[...pending].some(name=>name!=='probe');
+  $('connect').disabled=!api||v.exiting||state==='preparing'||pending.has('connect')||[...pending].some(name=>name!=='probe');
   $('probe').disabled=!api||state!=='connected'||pending.has('probe');
-  for(const id of ['save','install','refresh','forget','server','group','username','password','show-password','remember','password-storage','cidrs','keep-dns','core-custom'])$(id).disabled=running||pending.size>0||!api;
+  for(const id of ['save','install','refresh','forget','server','group','username','password','show-password','remember','password-storage','cidrs','keep-dns','core-custom'])$(id).disabled=running||v.exiting||pending.size>0||!api;
   $('install').setAttribute('aria-busy',String(state==='preparing'||pending.has('install')));
   if(!pending.has('install'))label('install',state==='preparing'?'正在准备…':'下载 / 修复核心');
   $('core-badge').textContent=c.ready?'已就绪':state==='preparing'?'准备中':'待准备';$('core-badge').classList.toggle('ready',!!c.ready);
@@ -112,6 +114,7 @@ $('manage-account').addEventListener('click',()=>focusAccount());
 $('edit-routes').addEventListener('click',()=>{showPage('settings');$('route-settings').open=true;$('cidrs').focus();});
 $('back-home').addEventListener('click',()=>showPage('home'));
 $('footer-core').addEventListener('click',()=>{showPage('settings');$('core-settings').open=true;});
+$('quit').addEventListener('click',()=>action('quit',()=>api.Quit()));
 $('connect').addEventListener('click',()=>action('connect',async()=>{
   notice('');
   if(view.state!=='disconnected'){await api.Disconnect();return;}

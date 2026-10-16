@@ -20,6 +20,7 @@ async function fixture(page,emptyUser=false){
     window.runtime={EventsOn:(name,callback)=>{onUpdate=callback;}};
     window.go={main:{App:{
       GetView:async()=>clone(state),RefreshCore:async()=>{emit({});return clone(core);},
+      Quit:async()=>{calls.push({method:'Quit'});emit({exiting:true});},
       SaveSettings:async settings=>{state.settings=clone(settings);calls.push({method:'SaveSettings'});},
       SaveProfile:async(settings,password)=>{state.settings=clone(settings);calls.push({method:'SaveProfile',hasPassword:!!password,storage:settings.passwordStorage});},
       ForgetPassword:async()=>{state.settings.remember=false;calls.push({method:'ForgetPassword'});},
@@ -103,7 +104,14 @@ async function fixture(page,emptyUser=false){
   const empty=await context.newPage();empty.on('pageerror',error=>errors.push(error.message));await fixture(empty,true);await empty.goto(origin);
   await empty.locator('#page-settings').waitFor();await empty.locator('#username').fill('new-student');await empty.locator('#password').fill('test-only-password');
   await empty.locator('#back-home').click();await empty.evaluate(()=>window.uiFixture.rejectNext=true);await empty.locator('#connect').click();await empty.locator('#error').filter({hasText:'测试连接错误'}).waitFor();assert(!(await empty.locator('#connect').isDisabled()));
-  const report={errors,externalRequests,overflow,pixelIcons:icons.length,realStateDriven:true,credentialActions:true,cancelAndDisconnect:true};
+  await page.evaluate(()=>window.uiFixture.emit({state:'disconnected',phase:'',tray:true,exiting:false}));
+  await page.locator('#tray-hint').waitFor();
+  await page.locator('#quit').click();
+  assert(await page.evaluate(()=>window.uiFixture.calls.some(call=>call.method==='Quit')));
+  assert(await page.locator('#connect').isDisabled(),'exiting must block a new connection');
+  assert(await page.locator('#quit').isDisabled());
+  assert.equal(await page.locator('#status').textContent(),'正在退出…');
+  const report={errors,externalRequests,overflow,pixelIcons:icons.length,realStateDriven:true,credentialActions:true,cancelAndDisconnect:true,trayHint:true};
   fs.writeFileSync(path.join(output,'report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));
   assert.equal(errors.length,0);assert.equal(externalRequests.length,0);assert.equal(overflow.length,0);
 })().catch(error=>{console.error(error);process.exitCode=1;}).finally(async()=>{if(browser)await browser.close();if(server)await new Promise(resolve=>server.close(resolve));});

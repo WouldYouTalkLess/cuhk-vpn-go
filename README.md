@@ -36,6 +36,7 @@ sh build.sh
 运行 `build/bin/` 下的程序，在设置中填写学校账号和密码，再点击连接。首次使用自动准备便携核心，不需要手动安装 OpenConnect。桌面界面仍依赖系统的 WebView2 或 GTK/WebKit 等运行环境。
 
 - Windows 提供 x64 / ARM64 GUI；ARM64 的 OpenConnect 核心使用系统 x64 仿真。
+- 关闭窗口后留在系统托盘，VPN 继续运行；点击托盘图标或「显示主界面」恢复窗口，菜单支持连接、取消、断开及正常退出。Linux 需要桌面提供 StatusNotifier 托盘服务，否则保留关闭窗口退出的行为。
 - Windows 已验证真实学校 VPN 连接；macOS/Linux 的真实连接仍需在对应系统测试。
 - 可选记住密码。便携保存模式将加密密钥与密文放在同一个 `data/` 目录，完整目录可迁移，也能被持有者解密；不要上传或转发个人 `data/`。
 
@@ -43,4 +44,4 @@ sh build.sh
 
 ## 第三方组件
 
-[Wails](https://github.com/wailsapp/wails)、[OpenConnect](https://gitlab.com/openconnect/openconnect)、[vpnc-scripts](https://gitlab.com/openconnect/vpnc-scripts) 和其他依赖保留各自许可证。点阵图标基于 Lucide / Feather，许可见 [`frontend/icons/LICENSE.txt`](frontend/icons/LICENSE.txt)。
+[Wails](https://github.com/wailsapp/wails)、[systray](https://github.com/fyne-io/systray)、[OpenConnect](https://gitlab.com/openconnect/openconnect)、[vpnc-scripts](https://gitlab.com/openconnect/vpnc-scripts) 和其他依赖保留各自许可证。点阵图标基于 Lucide / Feather，许可见 [`frontend/icons/LICENSE.txt`](frontend/icons/LICENSE.txt)。

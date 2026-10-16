@@ -1,4 +1,4 @@
-param([string]$OutputDirectory)
+param([string]$OutputDirectory, [string]$WindowsExecutable = 'CuhkVpn.exe', [string]$Arm64Executable = 'CuhkVpn-arm64.exe')
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path $PSScriptRoot
 $version = (Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'wails.json') | ConvertFrom-Json).info.productVersion
@@ -11,7 +11,7 @@ $coreBundles = @{
     'windows-arm64' = '9.21-a6f61d4f7a13'
 }
 # Validate all inputs before creating a release. No source data/ or old EXEs are copied.
-foreach ($name in @('CuhkVpn.exe', 'CuhkVpn-arm64.exe')) {
+foreach ($name in @($WindowsExecutable, $Arm64Executable)) {
     if (-not (Test-Path -LiteralPath (Join-Path $binRoot $name) -PathType Leaf)) { throw ('Missing GUI: ' + $name) }
 }
 foreach ($platform in $coreBundles.Keys) {
@@ -25,7 +25,8 @@ foreach ($platform in $coreBundles.Keys) {
     }
 }
 $null = New-Item -ItemType Directory -Path $OutputDirectory
-foreach ($name in @('CuhkVpn.exe', 'CuhkVpn-arm64.exe')) { Copy-Item -LiteralPath (Join-Path $binRoot $name) -Destination $OutputDirectory }
+Copy-Item -LiteralPath (Join-Path $binRoot $WindowsExecutable) -Destination (Join-Path $OutputDirectory 'CuhkVpn.exe')
+Copy-Item -LiteralPath (Join-Path $binRoot $Arm64Executable) -Destination (Join-Path $OutputDirectory 'CuhkVpn-arm64.exe')
 foreach ($platform in $coreBundles.Keys) {
     $sourceBundle = Join-Path (Join-Path $binRoot ('cores\' + $platform)) $coreBundles[$platform]
     $targetPlatform = Join-Path $OutputDirectory ('cores\' + $platform)
@@ -40,7 +41,8 @@ $defaults = [ordered]@{
 }
 $utf8 = [Text.UTF8Encoding]::new($false)
 [IO.File]::WriteAllText((Join-Path $dataRoot 'settings.json'), ($defaults | ConvertTo-Json -Depth 3), $utf8)
-Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'windows-release-readme.txt') -Destination (Join-Path $OutputDirectory 'README.txt')
+$readmeTemplate = [IO.File]::ReadAllText((Join-Path $PSScriptRoot 'windows-release-readme.txt'))
+[IO.File]::WriteAllText((Join-Path $OutputDirectory 'README.txt'), $readmeTemplate.Replace('{{VERSION}}', $version), $utf8)
 $licenses = Join-Path $OutputDirectory 'LICENSES'
 $null = New-Item -ItemType Directory -Path $licenses
 Copy-Item -LiteralPath (Join-Path $projectRoot 'frontend\icons\LICENSE.txt') -Destination (Join-Path $licenses 'Lucide-and-Feather.txt')

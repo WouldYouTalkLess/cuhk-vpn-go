@@ -67,7 +67,8 @@
         <div class="log-actions"><label class="check"><input id="follow" type="checkbox" checked>跟随最新</label><button id="clear" type="button" class="text-button">清空日志</button></div><p id="pid" class="small process-id"></p>
       </section>
     </div>
-    <footer class="app-footer"><span id="footer-version">OpenConnect</span><button id="footer-core" type="button" class="core-status"><span class="square-led" aria-hidden="true"></span><span id="footer-state">检查核心</span></button></footer>
+    <p id="tray-hint" class="help tray-hint" hidden>关闭窗口后留在托盘；右键托盘图标可断开或退出。</p>
+    <footer class="app-footer"><span id="footer-version">OpenConnect</span><button id="footer-core" type="button" class="core-status"><span class="square-led" aria-hidden="true"></span><span id="footer-state">检查核心</span></button><button id="quit" type="button" class="text-button" title="正常断开 VPN 后退出">退出</button></footer>
     <div class="screen-beam" aria-hidden="true"></div>
   </main>
   <script src="app.js"></script>

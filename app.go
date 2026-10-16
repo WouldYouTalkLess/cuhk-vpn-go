@@ -8,10 +8,10 @@ import (
 	"cuhk-vpn-go/internal/credentials"
 	"cuhk-vpn-go/internal/platform"
 	"cuhk-vpn-go/internal/protocol"
+	"cuhk-vpn-go/internal/tray"
 	"cuhk-vpn-go/internal/vpn"
 	"errors"
 	"fmt"
-	wruntime "github.com/wailsapp/wails/v2/pkg/runtime"
 	"strings"
 	"sync"
 	"time"
@@ -27,6 +27,8 @@ type View struct {
 	Interface string          `json:"interface"`
 	PID       int             `json:"pid"`
 	Logs      []string        `json:"logs"`
+	Tray      bool            `json:"tray"`
+	Exiting   bool            `json:"exiting"`
 }
 type App struct {
 	ctx           context.Context
@@ -37,25 +39,39 @@ type App struct {
 	done          chan struct{}
 	busy          bool
 	prepareCancel context.CancelFunc
+	tray          desktopTray
+	window        windowActions
+	exitWaiting   bool
+	exitTimeout   time.Duration
 }
 
 func NewApp() *App {
 	s, e := config.Load()
-	a := &App{view: View{Settings: s, State: "disconnected", Logs: []string{}}}
+	a := &App{view: View{Settings: s, State: "disconnected", Logs: []string{}}, window: nativeWindowActions()}
 	if e != nil {
 		a.view.Error = "读取设置失败：" + e.Error()
 	}
 	return a
 }
 func (a *App) startup(ctx context.Context) {
+	a.mu.Lock()
 	a.ctx = ctx
+	a.mu.Unlock()
+	a.emit()
 	if a.snapshot().Settings.CorePath == "" {
 		go a.PrepareCore()
 	}
 }
 func (a *App) emit() {
-	if a.ctx != nil {
-		wruntime.EventsEmit(a.ctx, "vpn:update", a.snapshot())
+	a.mu.Lock()
+	ctx, trayController := a.ctx, a.tray
+	a.mu.Unlock()
+	v := a.snapshot()
+	if trayController != nil {
+		trayController.Update(tray.Status{State: v.State, Phase: v.Phase, CoreReady: v.Core.Ready, UIReady: ctx != nil, Exiting: v.Exiting})
+	}
+	if ctx != nil && a.window.emit != nil {
+		a.window.emit(ctx, v)
 	}
 }
 func (a *App) snapshot() View {
@@ -64,6 +80,7 @@ func (a *App) snapshot() View {
 	v := a.view
 	v.Logs = append([]string{}, v.Logs...)
 	v.Settings.CIDRs = append([]string{}, v.Settings.CIDRs...)
+	v.Tray = a.tray != nil && a.tray.Active()
 	return v
 }
 func (a *App) GetView() View { return a.snapshot() }
@@ -115,7 +132,7 @@ func (a *App) SaveSettings(s config.Settings) error {
 	}
 	a.mu.Lock()
 	defer a.mu.Unlock()
-	if a.busy {
+	if a.busy || a.view.Exiting {
 		return errors.New("请先断开连接或等待安装完成后再修改设置")
 	}
 	if e = config.Save(s); e != nil {
@@ -148,7 +165,7 @@ func (a *App) SaveProfile(s config.Settings, password string) error {
 	}
 	a.mu.Lock()
 	defer a.mu.Unlock()
-	if a.busy {
+	if a.busy || a.view.Exiting {
 		return errors.New("请先结束当前操作")
 	}
 	if s.Remember && password != "" {
@@ -169,13 +186,15 @@ func (a *App) Connect(s config.Settings, password string) error {
 		return e
 	}
 	a.mu.Lock()
-	if a.busy {
+	if a.busy || a.view.Exiting {
 		a.mu.Unlock()
 		return errors.New("当前操作尚未结束")
 	}
 	a.busy = true
+	done := make(chan struct{})
+	a.done = done
 	a.mu.Unlock()
-	undo := func() { a.mu.Lock(); a.busy = false; a.mu.Unlock() }
+	undo := func() { a.mu.Lock(); a.busy = false; a.mu.Unlock(); close(done) }
 	if password == "" && s.Remember {
 		password, e = credentials.Get(s.PasswordStorage, credentialAccount(s))
 		if e != nil {
@@ -198,8 +217,13 @@ func (a *App) Connect(s config.Settings, password string) error {
 		return e
 	}
 	ctx, cancel := context.WithCancel(context.Background())
-	done := make(chan struct{})
 	a.mu.Lock()
+	if a.view.Exiting {
+		a.mu.Unlock()
+		cancel()
+		undo()
+		return errors.New("应用正在退出")
+	}
 	a.view.Settings = s
 	a.view.Error = ""
 	a.view.State = "connecting"
@@ -350,7 +374,7 @@ func (a *App) Disconnect() error {
 func (a *App) ForgetPassword() error {
 	a.mu.Lock()
 	defer a.mu.Unlock()
-	if a.busy {
+	if a.busy || a.view.Exiting {
 		return errors.New("请先结束当前操作")
 	}
 	s := a.view.Settings
@@ -368,7 +392,7 @@ func (a *App) ForgetPassword() error {
 func (a *App) ClearLogs() { a.mu.Lock(); a.view.Logs = []string{}; a.mu.Unlock(); a.emit() }
 func (a *App) PrepareCore() error {
 	a.mu.Lock()
-	if a.busy {
+	if a.busy || a.view.Exiting {
 		a.mu.Unlock()
 		return errors.New("请先结束当前操作")
 	}
@@ -422,32 +446,17 @@ func (a *App) Probe() (string, error) {
 }
 func (a *App) beforeClose(ctx context.Context) bool {
 	a.mu.Lock()
-	busy := a.busy
-	state := a.view.State
-	done := a.done
+	busy, exiting, trayController := a.busy, a.view.Exiting, a.tray
 	a.mu.Unlock()
-	if !busy {
-		return false
+	if !exiting && trayController != nil && trayController.CanHide() {
+		a.window.hide(ctx)
+		return true
 	}
-	if state == "preparing" {
-		a.mu.Lock()
-		cancel := a.prepareCancel
-		a.mu.Unlock()
-		if cancel != nil {
-			cancel()
-		}
-		return false
+	if busy {
+		a.Quit()
+		return true
 	}
-	a.Disconnect()
-	go func() {
-		select {
-		case <-done:
-			wruntime.Quit(ctx)
-		case <-time.After(35 * time.Second):
-			a.log("仍在正常断开，请稍后重试退出")
-		}
-	}()
-	return true
+	return false
 }
 func (a *App) shutdown(ctx context.Context) {
 	a.mu.Lock()
