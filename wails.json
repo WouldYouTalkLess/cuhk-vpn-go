@@ -1,0 +1,10 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "CUHK VPN",
+  "outputfilename": "CuhkVpn",
+  "frontend:dir": "frontend",
+  "frontend:install": "",
+  "frontend:build": "",
+  "author": { "name": "CUHK VPN" },
+  "info": { "productName": "CUHK VPN", "productVersion": "1.1.1" }
+}

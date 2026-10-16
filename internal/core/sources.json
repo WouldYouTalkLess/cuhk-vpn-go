@@ -1,0 +1,919 @@
+{
+  "schema": 1,
+  "plans": {
+    "windows/amd64": {
+      "version": "9.21",
+      "sources": [
+        {
+          "name": "windows-amd64-7zip",
+          "url": "https://github.com/ip7z/7zip/releases/download/26.04/7z2604-x64.exe",
+          "sha256": "d54bf805f9f3704d1e8db2fa3498ae7ef2df0312b40b558e7c71c734430a665d",
+          "format": "7zip-sfx"
+        },
+        {
+          "name": "windows-amd64-openconnect",
+          "url": "https://gitlab.com/openconnect/openconnect/-/jobs/artifacts/v9.21/raw/openconnect-installer-MinGW64-GnuTLS.exe?job=MinGW64%2FGnuTLS",
+          "sha256": "6ee9e8eb9bc59ef70bb0717df7f99703f8a2ccd11d8e45d58a61f9a2e6ef7d00",
+          "format": "nsis"
+        }
+      ]
+    },
+    "windows/386": {
+      "version": "9.21",
+      "sources": [
+        {
+          "name": "windows-386-7zip",
+          "url": "https://github.com/ip7z/7zip/releases/download/26.04/7z2604.exe",
+          "sha256": "39bf65045153fc26c42fa9fe47afd8cd1b11671c7f11d031e738c9a13960c009",
+          "format": "7zip-sfx"
+        },
+        {
+          "name": "windows-386-openconnect",
+          "url": "https://gitlab.com/openconnect/openconnect/-/jobs/artifacts/v9.21/raw/openconnect-installer-MinGW32-GnuTLS.exe?job=MinGW32%2FGnuTLS",
+          "sha256": "1fbf9cfe1ae732427348d2321a107c912fcc6049d25c2ebbb2fa91763f225b15",
+          "format": "nsis"
+        }
+      ]
+    },
+    "windows/arm64": {
+      "version": "9.21",
+      "sources": [
+        {
+          "name": "windows-amd64-7zip",
+          "url": "https://github.com/ip7z/7zip/releases/download/26.04/7z2604-x64.exe",
+          "sha256": "d54bf805f9f3704d1e8db2fa3498ae7ef2df0312b40b558e7c71c734430a665d",
+          "format": "7zip-sfx"
+        },
+        {
+          "name": "windows-amd64-openconnect",
+          "url": "https://gitlab.com/openconnect/openconnect/-/jobs/artifacts/v9.21/raw/openconnect-installer-MinGW64-GnuTLS.exe?job=MinGW64%2FGnuTLS",
+          "sha256": "6ee9e8eb9bc59ef70bb0717df7f99703f8a2ccd11d8e45d58a61f9a2e6ef7d00",
+          "format": "nsis"
+        }
+      ],
+      "emulatedArch": "amd64"
+    },
+    "darwin/amd64": {
+      "version": "9.21",
+      "minOS": "14.0",
+      "sources": [
+        {
+          "name": "macos-amd64-gmp",
+          "url": "https://ghcr.io/v2/homebrew/core/gmp/blobs/sha256:e8410d92339535174e9f4a5eccc403301b70c7287f2f9a87f064a9aa2e21b54b",
+          "sha256": "e8410d92339535174e9f4a5eccc403301b70c7287f2f9a87f064a9aa2e21b54b",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-ca-certificates",
+          "url": "https://ghcr.io/v2/homebrew/core/ca-certificates/blobs/sha256:be025e23565f2d7e012185e26fe716eaefa792a0e80b3fc34e4e10e966e89cd4",
+          "sha256": "be025e23565f2d7e012185e26fe716eaefa792a0e80b3fc34e4e10e966e89cd4",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-libunistring",
+          "url": "https://ghcr.io/v2/homebrew/core/libunistring/blobs/sha256:fbb3a7908a19f306823dbd51b417705c73f710a9a1fb1e34ba7aa67a3c966094",
+          "sha256": "fbb3a7908a19f306823dbd51b417705c73f710a9a1fb1e34ba7aa67a3c966094",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-gettext",
+          "url": "https://ghcr.io/v2/homebrew/core/gettext/blobs/sha256:2cc112cce103be3beb13cc8ba67f521d4e972c4082fd69868d34920d63120c09",
+          "sha256": "2cc112cce103be3beb13cc8ba67f521d4e972c4082fd69868d34920d63120c09",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-libidn2",
+          "url": "https://ghcr.io/v2/homebrew/core/libidn2/blobs/sha256:ef2c85790a55f54f58fceb849e1ee46f2b06ebe516c83043e68c979e47934e6f",
+          "sha256": "ef2c85790a55f54f58fceb849e1ee46f2b06ebe516c83043e68c979e47934e6f",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-libtasn1",
+          "url": "https://ghcr.io/v2/homebrew/core/libtasn1/blobs/sha256:71c5d144fdce79e4cfe7bbd5863da5171a13d892a26475c5ea183e7e3ef21d8f",
+          "sha256": "71c5d144fdce79e4cfe7bbd5863da5171a13d892a26475c5ea183e7e3ef21d8f",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-nettle",
+          "url": "https://ghcr.io/v2/homebrew/core/nettle/blobs/sha256:2830a19a06e2995fc7a19ecd7c14d3bc87e9362fb9c52d2489582246f256662d",
+          "sha256": "2830a19a06e2995fc7a19ecd7c14d3bc87e9362fb9c52d2489582246f256662d",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-p11-kit",
+          "url": "https://ghcr.io/v2/homebrew/core/p11-kit/blobs/sha256:e1e808da48ab0eb63ff145b55a3407d0265501e09b4e627f8ba02ecc654c3663",
+          "sha256": "e1e808da48ab0eb63ff145b55a3407d0265501e09b4e627f8ba02ecc654c3663",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-gnutls",
+          "url": "https://ghcr.io/v2/homebrew/core/gnutls/blobs/sha256:eb1d17b2a4abf89c34b79dd55b8808c24321ea6fed41da6550f3abbab70ad297",
+          "sha256": "eb1d17b2a4abf89c34b79dd55b8808c24321ea6fed41da6550f3abbab70ad297",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-libtommath",
+          "url": "https://ghcr.io/v2/homebrew/core/libtommath/blobs/sha256:cba9f676decfce08aedbc85a2caf32603d93eb186e93b2af1e96fe8bf595b11f",
+          "sha256": "cba9f676decfce08aedbc85a2caf32603d93eb186e93b2af1e96fe8bf595b11f",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-libtomcrypt",
+          "url": "https://ghcr.io/v2/homebrew/core/libtomcrypt/blobs/sha256:61fe2b3c884b8251113d9ba0ad706d18e9f0e273686b8fafdb98fe9a400be47d",
+          "sha256": "61fe2b3c884b8251113d9ba0ad706d18e9f0e273686b8fafdb98fe9a400be47d",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-stoken",
+          "url": "https://ghcr.io/v2/homebrew/core/stoken/blobs/sha256:e42c126e6b6c3e2f721d1d0dad2066a07b60f5e9e9ddee3ef57576ad4c9499e3",
+          "sha256": "e42c126e6b6c3e2f721d1d0dad2066a07b60f5e9e9ddee3ef57576ad4c9499e3",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-amd64-openconnect",
+          "url": "https://ghcr.io/v2/homebrew/core/openconnect/blobs/sha256:002d07d8c2aa42c02b8e9fa269b74fbccf0f1c0e1389da06f52e61c8309f4d45",
+          "sha256": "002d07d8c2aa42c02b8e9fa269b74fbccf0f1c0e1389da06f52e61c8309f4d45",
+          "format": "bottle"
+        },
+        {
+          "name": "vpnc-script",
+          "url": "https://gitlab.com/openconnect/vpnc-scripts/-/raw/ce9e961bd0f6b867e1c7c35f78f6fb973f6ff101/vpnc-script",
+          "sha256": "f0c4d936a382f07711263242699b5e2d85d1ace37136bb78785d352997c17742",
+          "format": "file"
+        }
+      ]
+    },
+    "darwin/arm64": {
+      "version": "9.21",
+      "minOS": "14.0",
+      "sources": [
+        {
+          "name": "macos-arm64-gmp",
+          "url": "https://ghcr.io/v2/homebrew/core/gmp/blobs/sha256:78e4f40cba6419cf7e2d81e9c945d1e93744511bd5230bdfac1b69ed894914b4",
+          "sha256": "78e4f40cba6419cf7e2d81e9c945d1e93744511bd5230bdfac1b69ed894914b4",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-ca-certificates",
+          "url": "https://ghcr.io/v2/homebrew/core/ca-certificates/blobs/sha256:be025e23565f2d7e012185e26fe716eaefa792a0e80b3fc34e4e10e966e89cd4",
+          "sha256": "be025e23565f2d7e012185e26fe716eaefa792a0e80b3fc34e4e10e966e89cd4",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-libunistring",
+          "url": "https://ghcr.io/v2/homebrew/core/libunistring/blobs/sha256:dc4d4b4406a2c7032dd838ae362ecaeba114d8ac9d9daaa18f760d1d71ba3577",
+          "sha256": "dc4d4b4406a2c7032dd838ae362ecaeba114d8ac9d9daaa18f760d1d71ba3577",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-gettext",
+          "url": "https://ghcr.io/v2/homebrew/core/gettext/blobs/sha256:f9ea4eed738746ea4150a4f83e8dd11ca21ca3de5bb113995c25eec409bb5749",
+          "sha256": "f9ea4eed738746ea4150a4f83e8dd11ca21ca3de5bb113995c25eec409bb5749",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-libidn2",
+          "url": "https://ghcr.io/v2/homebrew/core/libidn2/blobs/sha256:6c578e128c82759e211298ae9b004c83844c2626c074f5cf4950402399bdb8f1",
+          "sha256": "6c578e128c82759e211298ae9b004c83844c2626c074f5cf4950402399bdb8f1",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-libtasn1",
+          "url": "https://ghcr.io/v2/homebrew/core/libtasn1/blobs/sha256:2dceab4bf93738bd4f3efd9063a5cf60ccd96e5b0e5a3ac9fca508e42b5f3336",
+          "sha256": "2dceab4bf93738bd4f3efd9063a5cf60ccd96e5b0e5a3ac9fca508e42b5f3336",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-nettle",
+          "url": "https://ghcr.io/v2/homebrew/core/nettle/blobs/sha256:ffcf86d94ce0ee31890cfc5e2debfba3f4ab9125a507ff21cfa557acac70087e",
+          "sha256": "ffcf86d94ce0ee31890cfc5e2debfba3f4ab9125a507ff21cfa557acac70087e",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-p11-kit",
+          "url": "https://ghcr.io/v2/homebrew/core/p11-kit/blobs/sha256:bee65fbab57c03c46620379593e7bc4865cce0bf2db794cf22bdfcc1eb564979",
+          "sha256": "bee65fbab57c03c46620379593e7bc4865cce0bf2db794cf22bdfcc1eb564979",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-gnutls",
+          "url": "https://ghcr.io/v2/homebrew/core/gnutls/blobs/sha256:f0e71d1231213068342c729c70cf8dd5421ec1c87d5b2d21736db4fe4803a301",
+          "sha256": "f0e71d1231213068342c729c70cf8dd5421ec1c87d5b2d21736db4fe4803a301",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-libtommath",
+          "url": "https://ghcr.io/v2/homebrew/core/libtommath/blobs/sha256:6b17949dbb9a6a751816e0a39f441a6028b680d15960fe3fdb6686721dac70f3",
+          "sha256": "6b17949dbb9a6a751816e0a39f441a6028b680d15960fe3fdb6686721dac70f3",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-libtomcrypt",
+          "url": "https://ghcr.io/v2/homebrew/core/libtomcrypt/blobs/sha256:1b9d391bb3218384bf0aa828237089788f117de17522aba6f1e97179b01c8090",
+          "sha256": "1b9d391bb3218384bf0aa828237089788f117de17522aba6f1e97179b01c8090",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-stoken",
+          "url": "https://ghcr.io/v2/homebrew/core/stoken/blobs/sha256:964feda555eeeb9f2546af0830baa11d8a2340c56ecdb6c13d078b7b0c18ff5d",
+          "sha256": "964feda555eeeb9f2546af0830baa11d8a2340c56ecdb6c13d078b7b0c18ff5d",
+          "format": "bottle"
+        },
+        {
+          "name": "macos-arm64-openconnect",
+          "url": "https://ghcr.io/v2/homebrew/core/openconnect/blobs/sha256:cc157cf32a317f138140feb5f2fa948135f504805ba5f16a28ac610806fe67b2",
+          "sha256": "cc157cf32a317f138140feb5f2fa948135f504805ba5f16a28ac610806fe67b2",
+          "format": "bottle"
+        },
+        {
+          "name": "vpnc-script",
+          "url": "https://gitlab.com/openconnect/vpnc-scripts/-/raw/ce9e961bd0f6b867e1c7c35f78f6fb973f6ff101/vpnc-script",
+          "sha256": "f0c4d936a382f07711263242699b5e2d85d1ace37136bb78785d352997c17742",
+          "format": "file"
+        }
+      ]
+    },
+    "linux/amd64": {
+      "version": "9.12-r2",
+      "sources": [
+        {
+          "name": "linux-amd64-musl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/musl-1.2.6-r2.apk",
+          "sha256": "573712e2f49c15bfc20a2699f204acdfc74c772722b15e7353d768057fae0e71",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libcrypto3",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libcrypto3-3.5.9-r0.apk",
+          "sha256": "6632d758d8f5e9ea3b650fe966f23bbf9a202f8b8dceecac93da135dec5e3689",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libgpg-error",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libgpg-error-1.61-r0.apk",
+          "sha256": "580b80e679adda234e5d36e7633023c25cf20ce9fcf3ee8f9dd85ba578d886b6",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libgcrypt",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libgcrypt-1.12.2-r0.apk",
+          "sha256": "e7dd4be813331a5a42d433b2e2a0ce6ebf4e1f0752ce2bdf7e81a38f88a6517d",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-vpnc",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/vpnc-0.5.3-r10.apk",
+          "sha256": "6b1f5b8f6024a14f848a6c2099fc99459533582fdd494974bf7184195d887cdd",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libcap2",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libcap2-2.78-r0.apk",
+          "sha256": "42886a7b4bcde26347c712925c8dc7db202b6029ef9b8c7ee81577ab7bdd8fad",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-zlib",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/zlib-1.3.2-r1.apk",
+          "sha256": "63aeea03c15a2f9018f81805cfc8aa926bdf5cd68921f22149c2fbb5d0ee9f47",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-zstd-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/zstd-libs-1.5.7-r2.apk",
+          "sha256": "23c6065b0049b2406441564bcf0032515a43f78e80d76fcb85535a3803ef5d4e",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libelf",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libelf-0.195-r0.apk",
+          "sha256": "78c5a1993342ab1bdcdce30639fd0937e8000f6d0d85cea171f573d31decd036",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libmnl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libmnl-1.0.5-r2.apk",
+          "sha256": "3693162ff7c27998dbbb2da1c4bd9072079cd55af1fa3d6d2ade51d276e20157",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-iproute2-minimal",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/iproute2-minimal-7.0.0-r0.apk",
+          "sha256": "7a40bb386c19e7945e09683402adf2e30b15ce0003267376aa758280ce96dc27",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libxtables",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libxtables-1.8.13-r0.apk",
+          "sha256": "4b5c981a77af40f965debe18f06c0c20268956f141a1bfc1c8ff6a406d914465",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-iproute2-tc",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/iproute2-tc-7.0.0-r0.apk",
+          "sha256": "986bd70ac15aee6f230d08e60b5df9b86acf30e65ee8d4adf7fc08799ee18741",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-iproute2-ss",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/iproute2-ss-7.0.0-r0.apk",
+          "sha256": "524ce46df07ed94d626e78a582934cfdaf40a966869bd4aeaea59b8147a9df7e",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-busybox",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/busybox-1.37.0-r31.apk",
+          "sha256": "0e626fa97cf937fda7bba4ed4dde8e2f2dbb5083ac34e02180cec0c4eba9351b",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-ncurses-terminfo-base",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/ncurses-terminfo-base-6.6_p20260516-r0.apk",
+          "sha256": "ce83be6d0bd10584a53c3a5868cc1595ce5f0f8e0b621f8f7f70b6144e521fc9",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libncursesw",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libncursesw-6.6_p20260516-r0.apk",
+          "sha256": "cf8caa8a88bc4ce9d9e395567fefaf9ef7fbd55c50ae6155b35c1b58f3755023",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-yash",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/yash-2.60-r0.apk",
+          "sha256": "93786f260a19cb0689adfb85103ac0f3ff05ff0adb03d62b7a8354d01f451f2f",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-yash-binsh",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/yash-binsh-2.60-r0.apk",
+          "sha256": "9cf0427cc15be3fd78c4efd97a85fa09734d40ab58f983d9c3c212378bb13555",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-iproute2",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/iproute2-7.0.0-r0.apk",
+          "sha256": "4c74d82ca030ed30aa43f993d0353a1bba6e9f57f461ad90aa65ea355440673f",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-krb5-conf",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/krb5-conf-1.0-r2.apk",
+          "sha256": "28b8e361a1583c04e98c261c3eb05ca7f0c0e80a9984a7c1b3cbfd7b60c86f37",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libcom_err",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libcom_err-1.47.4-r0.apk",
+          "sha256": "4723d0fb8e286dc6adb54dd3cdaedcd8db54260f75ee778a5acb4c16922c0f52",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-keyutils-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/keyutils-libs-1.6.3-r4.apk",
+          "sha256": "855c94e6bd750fcd2ca34df29ae3602bc93bb0b4512b56d8f4ecca06919ed1b8",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libssl3",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libssl3-3.5.9-r0.apk",
+          "sha256": "05e3393fb95aa5751ca2f9d242f659f6cff82c1cc7767cc2df4a086f7ad01877",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libverto",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libverto-0.3.2-r2.apk",
+          "sha256": "c20d2d8db18fe088c14cf00efa3780c81ff13f0663525df85d25ad44d415cdf5",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-krb5-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/krb5-libs-1.22.2-r1.apk",
+          "sha256": "79502e864cafa97c7da8a07937422ee020f470526fe0c7fc8c2306302a7c2439",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-lz4-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/lz4-libs-1.10.0-r1.apk",
+          "sha256": "3ad4912ab8ecf5f6236fdb751f88243006b3a8f152684e455b781e16284dd298",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-pcsc-lite-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/pcsc-lite-libs-2.4.0-r4.apk",
+          "sha256": "f01c9af6f32a01dc385e7959dd2215711ab1037afe45f0cbf34efb19c7cb39ac",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-ca-certificates-bundle",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/ca-certificates-bundle-20260909-r0.apk",
+          "sha256": "a35f8cf2366d90294d0bb089af565fd17f3fa03721e61bcc7f02ed3d8334e7ea",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-brotli-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/brotli-libs-1.2.0-r1.apk",
+          "sha256": "f0823de7c6d45859aeb6a7facfc5cfbf2dadb83ad4f27c794cb6ecc74e578cee",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-c-ares",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/c-ares-1.34.8-r0.apk",
+          "sha256": "123fdeadc5ec884b897787f98d865492bf70402697b251cd1f3591a00b8c9d73",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libunistring",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libunistring-1.4.2-r0.apk",
+          "sha256": "3aa6030e603e34d96192742f327c0509f409c6769ce2e7b1463685dede38d714",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libidn2",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libidn2-2.3.8-r0.apk",
+          "sha256": "7d038ac558dde464964b033ce5126dd2eaf84cc414dc15e77c5424a321d0ebee",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-nghttp2-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/nghttp2-libs-1.70.0-r0.apk",
+          "sha256": "f0c4014eb2f10308dcdfd84cd49c121673c7b78cb8182b6e7a1388d8ae112a3b",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libpsl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libpsl-0.21.5-r3.apk",
+          "sha256": "ec665a344b6e887f00f0a47015cc732c3a281b69e84641dc8662ea234fde6cdb",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libcurl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libcurl-8.22.0-r0.apk",
+          "sha256": "40b2a8e15a8d24bc95a5f42aaeb018313a1ff457cee71d8e15aaf1328da765e8",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-duktape-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/duktape-libs-2.7.0-r3.apk",
+          "sha256": "1f0bd84d8d8f35ddcf12c7fad1d3ed6b30ece496bbfba992d9a6e96cff78c939",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libffi",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libffi-3.5.2-r1.apk",
+          "sha256": "6da1a19313a40c56cac756fb11e2c4d5267831e1c22fc8323f24c943c94da6e0",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libintl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libintl-1.0-r0.apk",
+          "sha256": "cb03919cba5624b5e8759d04f3b31913b02585355988b914bc31de4746ff5ef6",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libeconf",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libeconf-0.8.3-r0.apk",
+          "sha256": "2a791c7957961f830cf31b04f35f814a63afcf633badc9052425ff1cf2f64380",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libblkid",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libblkid-2.42.3-r1.apk",
+          "sha256": "2512c2bff496ac2b8561a3c814d21d35ce10cda579b3d410f9f96da93a5aaac1",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libmount",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libmount-2.42.3-r1.apk",
+          "sha256": "e2ae003260f2c1ec13666c6e108d5e8e3d64974b0667166a02432bd3be263a7a",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-pcre2",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/pcre2-10.49-r0.apk",
+          "sha256": "2919897914820f42a17a8d7d37df310d2dfad1c82ebe5f539cc5c765f916752a",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-glib",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/glib-2.88.1-r1.apk",
+          "sha256": "2f32203b97789bc9a92e57e2d9b89eb2e6951b69534ba082a683c6e49031cb5d",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libproxy",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/libproxy-0.5.12-r0.apk",
+          "sha256": "9656ff4015e4f2654f58e99dde115dd6c243bf6d22b92cfcc5f7b63f3b44d2e8",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-xz-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/xz-libs-5.8.4-r0.apk",
+          "sha256": "ab362dd515ead04c31a6c302163248da7aa4813e283c971e6dd3f789b453a1d9",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libxml2",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libxml2-2.13.9-r2.apk",
+          "sha256": "4b2f986159c659f014b942fe8a5d70c67af475153ca826c3dd53389eea46a300",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libltdl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libltdl-2.6.0-r1.apk",
+          "sha256": "5a61ee2419f1ca973ee03655265a52ba9296827169872ad1b645badb56984610",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-libxslt",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libxslt-1.1.43-r3.apk",
+          "sha256": "b8ea65dc36b982bba434e0c71a8cb39d16b49f80c2f80847c0f25f0cb356f38f",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-xmlsec",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/xmlsec-1.3.11-r0.apk",
+          "sha256": "3f12cb2b875eee9422a5a128e1aada3cce25b1dc424def11bc71b3609195d370",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-oath-toolkit-libpskc",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/oath-toolkit-libpskc-2.6.14-r1.apk",
+          "sha256": "0543808c53ea3211ca7c0744123197e17414e33ace42b2283a2f47caec7efbe2",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-gmp",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/gmp-6.3.0-r4.apk",
+          "sha256": "85323ef5bce8ff234736dc2d6592ea37aebdc6348a531e27430bdfe38364d256",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-nettle",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/nettle-3.10.2-r0.apk",
+          "sha256": "693c1a99b781cd17149916df30113ccd6bdddac130298c17b1286fd2ae438386",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-stoken",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/stoken-0.93-r0.apk",
+          "sha256": "176d5dcf19aaf234c603fc9b9d17e46118eff3e194c4508b9cf753dfd5724cc8",
+          "format": "apk"
+        },
+        {
+          "name": "linux-amd64-openconnect",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/openconnect-9.12-r2.apk",
+          "sha256": "0bc452bfadaa489958f1db2c4922649e9bf5dc10a44ff517aa12faadd6457859",
+          "format": "apk"
+        },
+        {
+          "name": "vpnc-script",
+          "url": "https://gitlab.com/openconnect/vpnc-scripts/-/raw/ce9e961bd0f6b867e1c7c35f78f6fb973f6ff101/vpnc-script",
+          "sha256": "f0c4d936a382f07711263242699b5e2d85d1ace37136bb78785d352997c17742",
+          "format": "file"
+        }
+      ]
+    },
+    "linux/arm64": {
+      "version": "9.12-r2",
+      "sources": [
+        {
+          "name": "linux-arm64-musl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/musl-1.2.6-r2.apk",
+          "sha256": "5e9674b7f41152fe2119093b5cb4c13eaaadb19c2d5422b2d7267913e663ee6e",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libcrypto3",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libcrypto3-3.5.9-r0.apk",
+          "sha256": "2676a2b0b6e23ea2edccf3ee982b9842a665d52603d047de3d0a185dc316d983",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libgpg-error",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libgpg-error-1.61-r0.apk",
+          "sha256": "73a31c0615677702ae183724d3c322eb3c75f687d3d5dc77bc28e06cae28745d",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libgcrypt",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libgcrypt-1.12.2-r0.apk",
+          "sha256": "ba0fc2b29691a0faefb0a10aa4ab6d3f490acc2cd7ac69b984e6cb5599cb8d96",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-vpnc",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/aarch64/vpnc-0.5.3-r10.apk",
+          "sha256": "c91a1600ea2fdbbd8f8e06c6d0f205804c3a3b3b1cca37d209e5ce92e1aa2e8b",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libcap2",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libcap2-2.78-r0.apk",
+          "sha256": "e13be383f18b1fcfe895361d816ff7cfd2b3c265e442bb371c4a234b29b0e4a9",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-zlib",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/zlib-1.3.2-r1.apk",
+          "sha256": "1f77a542ac6634761b9fe38d8bdca19b154071dcfa25432e73f2bc8a0740a33f",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-zstd-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/zstd-libs-1.5.7-r2.apk",
+          "sha256": "2bb5136c89f5b0bbe1554c8915a3b520d5aa63ae2a51d4d821eb81698db5a818",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libelf",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libelf-0.195-r0.apk",
+          "sha256": "1c108314af454a885ac0b053201db57027470c4f2309412c016897e2a2bf5d0e",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libmnl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libmnl-1.0.5-r2.apk",
+          "sha256": "0ca382c70f78affef3a4a28016aab25ad8c3ccf1bcdad59f3968d4536a7b2478",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-iproute2-minimal",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/iproute2-minimal-7.0.0-r0.apk",
+          "sha256": "5ef23a7fd11df32dae739de6f3faca463711809eeab0391c38ad268636ee0b70",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libxtables",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libxtables-1.8.13-r0.apk",
+          "sha256": "7535f18d9c7229178bc5e3809e5fea171033e33dfa054d88846512e1f25eefa8",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-iproute2-tc",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/iproute2-tc-7.0.0-r0.apk",
+          "sha256": "748f12e0d0f13503f113e36fe4f8e287541c5d51d8c9c8fae1e2dcf31a7db903",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-iproute2-ss",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/iproute2-ss-7.0.0-r0.apk",
+          "sha256": "aedabd90cdd393d3c90c3dd71d60d25722ab229e6b6e3e112c820f20c9b778dc",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-busybox",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/busybox-1.37.0-r31.apk",
+          "sha256": "18e3490a6f024004b2b13dd4b54bd50ccd82894938023b2d4eab389a4edcba70",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-ncurses-terminfo-base",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/ncurses-terminfo-base-6.6_p20260516-r0.apk",
+          "sha256": "e0c546b9461bdce206a90bc720cb69aa4628b5a5b8d908c3e5084e00f28f6a9d",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libncursesw",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libncursesw-6.6_p20260516-r0.apk",
+          "sha256": "51a7aa4b3ec40b144d0801c0544e0a9f62e2a41d04b6067bb5e95786040741c6",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-yash",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/yash-2.60-r0.apk",
+          "sha256": "f7604292d43c8dad80aa292394ed3b2c833d8f74962e3efbb55629ef75b9b6e8",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-yash-binsh",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/yash-binsh-2.60-r0.apk",
+          "sha256": "6abc802cd0d46092a8e4bf2d2571f764eec3def5606cdaffb2cbdb045b82e738",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-iproute2",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/iproute2-7.0.0-r0.apk",
+          "sha256": "fbcfeece6ecf0d8273e946dcfbafc22c5a86982273f6e7763db06a52a329786b",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-krb5-conf",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/krb5-conf-1.0-r2.apk",
+          "sha256": "14cf4469b1aa931c30a05b5dca4f516faac46ac1c28147c99634b0f7b6f0442f",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libcom_err",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libcom_err-1.47.4-r0.apk",
+          "sha256": "a75b5955ff57046e33fc2842cfe466dc77d8e68305d5c86c6646b38a069490a2",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-keyutils-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/keyutils-libs-1.6.3-r4.apk",
+          "sha256": "ff992a1a3ec0733710782107fc0d6cbb2c72eb66a58bd80de91d72b623cbcfc8",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libssl3",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libssl3-3.5.9-r0.apk",
+          "sha256": "20ac252b276d73f2c69c1d25f84537c7fba81caefc026c6be1094b394af2082e",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libverto",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libverto-0.3.2-r2.apk",
+          "sha256": "0a11f278b99992f365518a0e2763f55542637aabb8515db5e87d3ead4d3bb06a",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-krb5-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/krb5-libs-1.22.2-r1.apk",
+          "sha256": "6ea86f0c4b700fdd1880bf03c9b7651a1086a787f8a4573534840291240d31c6",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-lz4-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/lz4-libs-1.10.0-r1.apk",
+          "sha256": "af6cbe553adda941e04ac40cf0123455b714d65392472389113e7d6dcebbd8d8",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-pcsc-lite-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/pcsc-lite-libs-2.4.0-r4.apk",
+          "sha256": "c83dc3ba5a15ae9e3bfe3f50d6322ffab7949863376f5d88ae6773a6884ec8df",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-ca-certificates-bundle",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/ca-certificates-bundle-20260909-r0.apk",
+          "sha256": "81a2c508dcdb3295196e6a8987274e3bc3487f99ad8d18e985f20bb2c336b5e6",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-brotli-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/brotli-libs-1.2.0-r1.apk",
+          "sha256": "e0e7a7892f28326a9f18e09607b1aea72baedda470bc4e3d2b11262b9ae5dda3",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-c-ares",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/c-ares-1.34.8-r0.apk",
+          "sha256": "689603d300dc56f0b99e313506e4d7b3a3ffb87cec536324f8a306bc218afe67",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libunistring",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libunistring-1.4.2-r0.apk",
+          "sha256": "58abfcbce2459071c505771a572a79953d6043d72b643ed0d5285ca39cdaf85c",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libidn2",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libidn2-2.3.8-r0.apk",
+          "sha256": "d02ffda4510652f89c5fb89cd2e7ff721afb0c74e7d75476ad60bebe7ac0ae20",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-nghttp2-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/nghttp2-libs-1.70.0-r0.apk",
+          "sha256": "7ef451f4dcdc065aa872c2f3c78b9d9bb4348caa5bcc70dee0c9e1fcf8e4c1fd",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libpsl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libpsl-0.21.5-r3.apk",
+          "sha256": "b31e91371425d5f80c1db5cba2a849956b65c802add0b49de844b2ca961aa8da",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libcurl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libcurl-8.22.0-r0.apk",
+          "sha256": "cbec830a63888be570c06d20d87c85649aff1db38c3b4dcc17884b14471e39e3",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-duktape-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/aarch64/duktape-libs-2.7.0-r3.apk",
+          "sha256": "a2a7b52fa72110ec625107e32278046aef3081fa41d1d6950de6b66f2819eb12",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libffi",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libffi-3.5.2-r1.apk",
+          "sha256": "9a67280b0c7c62db658c2d4d32ed1199903bef859c32dd4245e1a7e35c89ab4b",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libintl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libintl-1.0-r0.apk",
+          "sha256": "d106a13e3e68103d3a8217406aae6186289baf352d0f3d10fc21938d2dd8adb1",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libeconf",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libeconf-0.8.3-r0.apk",
+          "sha256": "cf0899d49ded0a6891e3cdf1b37887f2ecd77293afe1d8f3cb8937763c83f183",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libblkid",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libblkid-2.42.3-r1.apk",
+          "sha256": "9d0f24976c575c53c12526b6e078edf34c980c153bc8e5f1c1053cbece5b8cfa",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libmount",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libmount-2.42.3-r1.apk",
+          "sha256": "a2a6fc6aab7a59c70ec060f5fb8c950be42d1a017934bf32e5dd6984eaab15cc",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-pcre2",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/pcre2-10.49-r0.apk",
+          "sha256": "03efd0b29f7f38deb10a9ccb54f56e19683eb7ac27eb1f347e6dbd2e59ea000d",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-glib",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/glib-2.88.1-r1.apk",
+          "sha256": "0ae89191a79ea5d5a02515e41f29b62e5e0a0a80fb059804bbbacac2d77cce4e",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libproxy",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/aarch64/libproxy-0.5.12-r0.apk",
+          "sha256": "5c4d4e7deedccc48774b2cd547868bf909e0d6bbe42be9b4e5c064a41d94b036",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-xz-libs",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/xz-libs-5.8.4-r0.apk",
+          "sha256": "9be375832e747afe14f98e400e8b55d8f6fde25e41663090c81600628daab093",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libxml2",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libxml2-2.13.9-r2.apk",
+          "sha256": "0a860a26ebdfea491498386fe682130f4c5565e46ee8e0a2281256db2ef1be27",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libltdl",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libltdl-2.6.0-r1.apk",
+          "sha256": "16d92108ccd2f7155c88348a144ee51fd1c28ff483ec8a1dec5f20ff67f1e079",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-libxslt",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/libxslt-1.1.43-r3.apk",
+          "sha256": "c0f82af1a465343cde84e53f41f0941d66d6d7b28f66ed7ca11943f64ecc4c9e",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-xmlsec",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/aarch64/xmlsec-1.3.11-r0.apk",
+          "sha256": "2b55679016111fb7df257873f4cf5eeea4c135fb355a21cff71144ae5ddd7747",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-oath-toolkit-libpskc",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/aarch64/oath-toolkit-libpskc-2.6.14-r1.apk",
+          "sha256": "0507a4c19b0bade6930fa57daeb0c806cf0cf4e2f418d77661c6d551f9c16379",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-gmp",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/gmp-6.3.0-r4.apk",
+          "sha256": "4dab6e86b850fe1b5bc0cf2fac17efa4d7f648bea44f3d9019694cc1e1cb12b7",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-nettle",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/aarch64/nettle-3.10.2-r0.apk",
+          "sha256": "573c54ecb55b157d9cd5323eb3a9bb9d87b375ee20392a6a9d16c0ba098af9e5",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-stoken",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/aarch64/stoken-0.93-r0.apk",
+          "sha256": "4c36c353fef04fa927eabc7c0e76fdd0e9a803fb74fb19637feb42cc095d5e3e",
+          "format": "apk"
+        },
+        {
+          "name": "linux-arm64-openconnect",
+          "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/aarch64/openconnect-9.12-r2.apk",
+          "sha256": "faacb787cfedba6e33fa23dabfbce14cb6afc9c043ec2e29a2c4171f078feae1",
+          "format": "apk"
+        },
+        {
+          "name": "vpnc-script",
+          "url": "https://gitlab.com/openconnect/vpnc-scripts/-/raw/ce9e961bd0f6b867e1c7c35f78f6fb973f6ff101/vpnc-script",
+          "sha256": "f0c4d936a382f07711263242699b5e2d85d1ace37136bb78785d352997c17742",
+          "format": "file"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data:; connect-src 'self' ws: wss:; object-src 'none'; base-uri 'none'">
+  <meta name="color-scheme" content="dark">
+  <title>CUHK VPN · CRT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app" class="crt-window" data-state="disconnected" aria-label="CUHK VPN">
+    <header class="app-header">
+      <div class="brand"><span class="icon-frame"><span class="pixel-icon icon-network" aria-hidden="true"></span></span><h1>CUHK VPN</h1></div>
+      <span id="header-state" class="header-state">校园分流</span>
+    </header>
+    <nav class="tabs" role="tablist" aria-label="主要功能">
+      <button id="tab-home" type="button" class="tab" role="tab" aria-controls="page-home" aria-selected="true" data-page="home"><span class="pixel-icon icon-power" aria-hidden="true"></span>连接</button>
+      <button id="tab-settings" type="button" class="tab" role="tab" aria-controls="page-settings" aria-selected="false" data-page="settings" tabindex="-1"><span class="pixel-icon icon-settings" aria-hidden="true"></span>设置</button>
+      <button id="tab-logs" type="button" class="tab" role="tab" aria-controls="page-logs" aria-selected="false" data-page="logs" tabindex="-1"><span class="pixel-icon icon-terminal" aria-hidden="true"></span>日志<span id="log-count" class="log-count">0</span></button>
+    </nav>
+    <div class="messages">
+      <div id="error" class="message error" role="alert" hidden></div>
+      <div id="notice" class="message" role="status" hidden></div>
+    </div>
+    <div class="content">
+      <section id="page-home" class="page" role="tabpanel" aria-labelledby="tab-home">
+        <div class="terminal-display">
+          <div class="terminal-caption"><span id="connection-target">CUHK(SZ) / VPN</span><span id="core-short-status">检查核心</span></div>
+          <h2 class="connection-heading"><span id="status" aria-live="polite">尚未连接</span><span class="cursor-block" aria-hidden="true"></span></h2>
+          <p id="connection-detail" class="connection-detail" aria-live="polite">校园网段通过 VPN，其余流量直连</p>
+          <ol class="stage-list" aria-label="连接进度">
+            <li id="stage-core"><span class="stage-marker" aria-hidden="true">[ -- ]</span><span>便携核心</span><span class="stage-state sr-only">待准备</span></li>
+            <li id="stage-authorize"><span class="stage-marker" aria-hidden="true">[ -- ]</span><span>系统授权</span><span class="stage-state sr-only">等待</span></li>
+            <li id="stage-connect"><span class="stage-marker" aria-hidden="true">[ -- ]</span><span>校园连接</span><span class="stage-state sr-only">等待</span></li>
+          </ol>
+          <button id="connect" type="button" class="button primary connect-button" disabled><span class="prompt" aria-hidden="true">&gt;</span><span class="block-loader" aria-hidden="true"></span><span class="button-label">连接 VPN</span></button>
+        </div>
+        <div class="account-row">
+          <span class="icon-frame"><span class="pixel-icon icon-user" aria-hidden="true"></span></span>
+          <div class="account-text"><span id="account-name">学校账号</span><small id="password-summary">连接时输入密码</small></div>
+          <button id="manage-account" type="button" class="text-button">管理<span class="pixel-icon icon-right" aria-hidden="true"></span></button>
+        </div>
+        <div class="route-row">
+          <div class="route-text"><span class="small">校园分流</span><div class="route-value"><span class="pixel-icon icon-route" aria-hidden="true"></span><span id="route-summary">10.20.0.0/16</span></div></div>
+          <button id="edit-routes" type="button" class="text-button">编辑<span class="pixel-icon icon-right" aria-hidden="true"></span></button>
+        </div>
+        <div class="home-bottom"><span>其余流量保持直连</span><button id="probe" type="button" class="text-button" disabled><span class="pixel-icon icon-check" aria-hidden="true"></span><span class="block-loader" aria-hidden="true"></span><span class="button-label">检测分流</span></button></div>
+      </section>
+      <section id="page-settings" class="page" role="tabpanel" aria-labelledby="tab-settings" hidden>
+        <div class="page-heading"><h2>连接设置</h2><p>账号、分流与核心维护</p></div>
+        <form id="settings-form">
+          <div class="field"><label for="username">学校账号</label><input id="username" autocomplete="username" placeholder="不带邮箱后缀的用户名" maxlength="256" spellcheck="false"></div>
+          <div class="field"><label for="password">VPN 密码</label><div class="password-field"><input id="password" type="password" autocomplete="current-password" placeholder="输入 VPN 密码" maxlength="4096"><button id="show-password" type="button" class="text-button" aria-label="显示密码" aria-pressed="false">显示</button></div></div>
+          <div class="remember-row"><label class="check"><input id="remember" type="checkbox">记住密码</label><button id="forget" type="button" class="text-button">清除所选密码</button></div>
+          <div class="field"><label for="password-storage">密码保存方式</label><select id="password-storage"><option value="portable">随软件目录保存 · 可换电脑</option><option value="system">系统凭据存储 · 当前用户</option></select></div>
+          <p id="password-hint" class="help">请妥善保管软件目录，持有完整目录的人也能读取密码。</p>
+          <details id="server-settings" class="settings-group"><summary>服务器与认证组<span class="pixel-icon icon-down" aria-hidden="true"></span></summary><div class="details-body"><div class="field"><label for="server">VPN 地址</label><input id="server" type="url" value="https://vpn.cuhk.edu.cn" spellcheck="false"></div><div class="field"><label for="group">认证组</label><input id="group" value="CUHK(SZ)"></div></div></details>
+          <details id="route-settings" class="settings-group"><summary>分流与 DNS<span class="pixel-icon icon-down" aria-hidden="true"></span></summary><div class="details-body"><div class="field"><label for="cidrs">通过 VPN 的目标网段</label><textarea id="cidrs" rows="3" spellcheck="false">10.20.0.0/16</textarea></div><p class="help">每行一个 IPv4 CIDR，其他流量使用当前网络。</p><label class="check"><input id="keep-dns" type="checkbox">使用学校下发的 DNS</label><p class="small dns-help">默认保留系统 DNS。</p></div></details>
+          <details id="core-settings" class="settings-group"><summary><span>OpenConnect 核心 <span id="core-badge" class="badge">检查中</span></span><span class="pixel-icon icon-down" aria-hidden="true"></span></summary><div class="details-body"><p id="core-version" class="core-version">正在检查便携核心…</p><p id="core-path" class="path"></p><p id="install-method" class="help"></p><div class="field"><label for="core-custom">自定义核心路径</label><input id="core-custom" placeholder="留空使用自动准备的便携核心" spellcheck="false"></div><p class="help">自定义核心需配套动态库和路由脚本。</p><div class="core-actions"><button id="install" type="button" class="button"><span class="pixel-icon icon-refresh" aria-hidden="true"></span><span class="block-loader" aria-hidden="true"></span><span class="button-label">下载 / 修复核心</span></button><button id="refresh" type="button" class="text-button"><span class="button-label">重新检测</span></button></div><p id="platform" class="small platform"></p></div></details>
+          <div class="form-actions"><button id="save" type="submit" class="button primary"><span class="block-loader" aria-hidden="true"></span><span class="button-label">保存设置</span></button><button id="back-home" type="button" class="text-button">返回连接<span class="pixel-icon icon-right" aria-hidden="true"></span></button></div>
+        </form>
+      </section>
+      <section id="page-logs" class="page logs-page" role="tabpanel" aria-labelledby="tab-logs" hidden>
+        <div class="page-heading"><h2>运行日志</h2><p>最近 500 条 · 认证信息自动脱敏</p></div>
+        <div id="log-output" class="log-output" tabindex="0" aria-label="运行日志"><span class="log-empty">便携核心与连接活动将显示在这里。</span></div>
+        <div class="log-actions"><label class="check"><input id="follow" type="checkbox" checked>跟随最新</label><button id="clear" type="button" class="text-button">清空日志</button></div><p id="pid" class="small process-id"></p>
+      </section>
+    </div>
+    <footer class="app-footer"><span id="footer-version">OpenConnect</span><button id="footer-core" type="button" class="core-status"><span class="square-led" aria-hidden="true"></span><span id="footer-state">检查核心</span></button></footer>
+    <div class="screen-beam" aria-hidden="true"></div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

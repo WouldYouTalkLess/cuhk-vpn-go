@@ -1,0 +1,28 @@
+# Runtime data and downloaded VPN cores
+/data/
+/cores/
+**/passwords/
+.env
+.env.*
+!.env.example
+
+# Generated output, packages, logs and diagnostic data
+/build/*
+!/build/appicon.png
+!/build/windows/
+/build/windows/*
+!/build/windows/icon.ico
+!/build/windows/info.json
+!/build/windows/wails.exe.manifest
+/dist/
+*.log
+*.test
+*.test.exe
+/*-res.syso
+
+# Generated Wails bindings and workstation tools
+/frontend/wailsjs/
+/.tools/
+/node_modules/
+.DS_Store
+Thumbs.db
